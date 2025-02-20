@@ -8,13 +8,14 @@
 
 bool blocked = 0;
 
+
 wchar_t* GetWC(const char* c)
 {
-    const size_t cSize = strlen(c) + 1;
+    size_t cSize = strlen(c) + 1;
     wchar_t* wc = new wchar_t[cSize];
 
     size_t convertedChars = 0;
-    errno_t err = mbstowcs_s(&convertedChars, wc, cSize, c, _TRUNCATE);
+    errno_t err = mbstowcs_s(&convertedChars, wc, cSize, c, cSize - 1);
 
     if (err != 0)
     {
@@ -24,6 +25,7 @@ wchar_t* GetWC(const char* c)
 
     return wc;
 }
+
 
 
 int main() {
